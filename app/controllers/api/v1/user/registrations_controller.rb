@@ -18,6 +18,16 @@ class Api::V1::User::RegistrationsController < Devise::RegistrationsController
       render json: { user: resource, status: :success, message: "User created successfully" }
     end
   end
+
+  def configure_permitted_parameters
+     param_keys = [:email, :password]
+     devise_parameter_sanitizer.permit(:sign_up, keys: param_keys)
+     # devise_parameter_sanitizer.permit(:account_update, keys: param_keys)
+   end
+
+   def resource_name
+     :user
+   end
   
 
 end
