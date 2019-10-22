@@ -1,7 +1,6 @@
 class Api::V1::User::RegistrationsController < Devise::RegistrationsController
   def create
    ActiveRecord::Base.transaction do
-    debugger
      build_resource(sign_up_params)
        resource.save
        yield resource if block_given?
@@ -19,20 +18,7 @@ class Api::V1::User::RegistrationsController < Devise::RegistrationsController
       render json: { user: resource, status: :success, message: "User created successfully" }
     end
   end
-  # def create
-  #   unless User.where(email: params[:user][:email]).exists?
-  #     if params[:user][:password] == params[:user][:password_confirmation]
-  #       @user = User.new({email: params[:user][:email], password: params[:user][:password],password_confirmation: params[:user][:password_confirmation]})
-  #       if @user.save   
-  #         render json: { user: resource, status: :success, message: "User created successfully" }
-  #       else
-  #         render json: { user: resource, status: :success, message: "Failed to create user" }
-  #       end
-  #     end 
-  #   else
-  #     render json: {  status: :success, message: "User Already Exists" }
-  #   end      
-  # end 
+  
 
 end
 
